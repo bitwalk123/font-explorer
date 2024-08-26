@@ -12,22 +12,20 @@ from PySide6.QtWidgets import (
 class FontChooser(QWidget):
     def __init__(self):
         super().__init__()
-        self.init_ui()
         self.setWindowTitle('font selection')
 
-    def init_ui(self):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        btn = QPushButton('Select Font')
-        btn.setSizePolicy(
+        but_font = QPushButton('Select Font')
+        but_font.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Expanding
         )
-        btn.clicked.connect(self.button_clicked)
-        layout.addWidget(btn)
+        but_font.clicked.connect(self.font_selected)
+        layout.addWidget(but_font)
 
-    def button_clicked(self):
+    def font_selected(self):
         button: QPushButton = self.sender()
         ok, font = QFontDialog.getFont()
         if ok:
