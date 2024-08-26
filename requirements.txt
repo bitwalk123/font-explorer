@@ -1,0 +1,9 @@
+backports.tarfile
+importlib-metadata
+importlib-resources
+jaraco.text
+pip-chill
+pip-review
+platformdirs
+pyside6
+tomli
