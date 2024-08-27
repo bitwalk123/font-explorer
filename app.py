@@ -1,35 +1,37 @@
 import sys
+
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QFontDatabase, QRawFont
 from PySide6.QtWidgets import (
     QApplication,
-    QFontDialog,
-    QPushButton,
-    QSizePolicy,
     QVBoxLayout,
-    QWidget,
+    QWidget, QMainWindow, QLineEdit, QPlainTextEdit,
 )
 
 
-class FontChooser(QWidget):
+class FontChooser(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('font selection')
+        self.setWindowTitle('Font Explorer')
+
+        id_font = QFontDatabase.addApplicationFont('fonts/PopRumKiwi-Telop.ttf')
+
+        base = QWidget()
+        self.setCentralWidget(base)
 
         layout = QVBoxLayout()
-        self.setLayout(layout)
+        base.setLayout(layout)
 
-        but_font = QPushButton('Select Font')
-        but_font.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Expanding
-        )
-        but_font.clicked.connect(self.font_selected)
-        layout.addWidget(but_font)
-
-    def font_selected(self):
-        button: QPushButton = self.sender()
-        ok, font = QFontDialog.getFont()
-        if ok:
-            button.setFont(font)
+        pte_font = QPlainTextEdit()
+        family = QFontDatabase.applicationFontFamilies(id_font)[0]
+        pte_font.setStyleSheet("""
+          QPlainTextEdit{
+            font-family: %s;
+            font-size: 32px;
+            background-color: white;
+          }
+        """ % family)
+        layout.addWidget(pte_font)
 
 
 def main():
