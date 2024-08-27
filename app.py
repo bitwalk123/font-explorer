@@ -25,7 +25,7 @@ class FontChooser(QMainWindow):
         pte_font = QPlainTextEdit()
         family = QFontDatabase.applicationFontFamilies(id_font)[0]
         pte_font.setStyleSheet("""
-          QPlainTextEdit{
+          QPlainTextEdit {
             font-family: %s;
             font-size: 32px;
             background-color: white;
